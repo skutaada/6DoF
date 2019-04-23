@@ -1,21 +1,20 @@
 import socket
 import struct
 
-# Create UDP socket.
+# Create UDP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Bind to LFS.
-sock.bind(('', 5005))
+# Bind to LFS
+sock.bind(('', 30000))
 
 while True:
-    # Receive data.
+    # Receive data
     data = sock.recv(256)
-    print(data)
 
     if not data:
         break # Lost connection
   
-    # Unpack the data.
+    # Unpack the data
     outsim_pack = struct.unpack('I12f3i', data)
     time = outsim_pack[0]
     angvel = [outsim_pack[1], outsim_pack[2], outsim_pack[3]]
